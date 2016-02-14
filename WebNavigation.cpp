@@ -12,6 +12,34 @@ WebNavigation::WebNavigation()
 	_quitCommand = "QUIT";
 }
 
+bool WebNavigation::excute( std::string command,
+		std::string& currentPage )
+{
+	if( strcmp( command.c_str(), _quitCommand ) == 0 )
+	{
+		return quit();
+	}
+
+	currentPage = _failMsg;
+	if( strcmp( command.c_str(), _backCommand ) == 0 )
+	{
+		currentPage = back();
+	}
+	else if( strcmp( command.c_str(), _forwardCommand ) == 0 )
+	{
+		currentPage = forward();
+	}
+	else if( strncmp( command.c_str(), _visitCommand, 5 ) == 0 )
+	{
+		int startPosition = getWebSiteStartPosition( &command[5] );
+		if( startPosition != -1 )
+		{
+			currentPage = visit( &command[ 5 + startPosition ] );
+		}
+	}
+
+	return SUCCESS;
+}
 
 std::string WebNavigation::back()
 {
@@ -53,35 +81,6 @@ std::string WebNavigation::visit( const std::string webSite )
 bool WebNavigation::quit()
 {
 	return QUIT;
-}
-
-bool WebNavigation::excute( std::string command,
-		std::string& currentPage )
-{
-	if( strcmp( command.c_str(), _quitCommand ) == 0 )
-	{
-		return quit();
-	}
-
-	currentPage = _failMsg;
-	if( strcmp( command.c_str(), _backCommand ) == 0 )
-	{
-		currentPage = back();
-	}
-	else if( strcmp( command.c_str(), _forwardCommand ) == 0 )
-	{
-		currentPage = forward();
-	}
-	else if( strncmp( command.c_str(), _visitCommand, 5 ) == 0 )
-	{
-		int startPosition = getWebSiteStartPosition( &command[5] );
-		if( startPosition != -1 )
-		{
-			currentPage = visit( &command[ 5 + startPosition ] );
-		}
-	}
-
-	return SUCCESS;
 }
 
 int WebNavigation::getWebSiteStartPosition( char* afterVisitCommand )
