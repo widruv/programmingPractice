@@ -5,6 +5,7 @@
 int main()
 {
 	WebNavigation aWebNavigation;
+
 	while(true)
 	{
 		std::string inputString;

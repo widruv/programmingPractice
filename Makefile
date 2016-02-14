@@ -1,3 +1,5 @@
+.PHONY: all test clean
+
 CC = g++
 OBJS = main.o WebNavigation.o
 TARGET = web_navigation

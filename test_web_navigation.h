@@ -69,6 +69,7 @@ public:
 	{
 		TWebNavigation aWebNavigation;
 		const std::string webSite( "http://acm.ashland.edu/" );
+
 		std::string currentPage = aWebNavigation.visit( webSite );
 		TS_ASSERT_EQUALS( currentPage, webSite );
 

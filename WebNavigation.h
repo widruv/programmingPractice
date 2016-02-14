@@ -37,5 +37,4 @@ private:
 
 	std::string _currentPage;
 };
-
 #endif
