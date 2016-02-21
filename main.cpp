@@ -11,7 +11,7 @@ int main()
 		std::string inputString;
 		std::string currentPage;
 		std::getline( std::cin, inputString );
-		if ( aWebNavigation.excute( inputString, currentPage ) == 0 )
+		if ( aWebNavigation.execute( inputString, currentPage ) == 0 )
 		{
 			break;
 		}

@@ -10,7 +10,7 @@ public:
 	WebNavigation();
 	~WebNavigation(){}
 
-	bool excute( std::string command, std::string& currentPage );
+	int execute( std::string command, std::string& currentPage );
 
 protected:
 	std::string back();
@@ -19,10 +19,11 @@ protected:
 	bool quit();
 
 private:
-	enum EXCUTE_RESULT{ QUIT = 0, SUCCESS, IGNORED };
+	enum excuteResult{ QUIT = 0, EXECUTE, IGNORED };
+	enum parsingResult { FAIL = 0, SUCCESS };
 
 	void clearForwardStack();
-	int getWebSiteStartPosition( char* afterVisitCommand );
+	int getWebSiteFromCommand( const std::string& command, std::string& webSite );
 
 	std::stack<std::string> _forwardStack;
 	std::stack<std::string> _backwardStack;

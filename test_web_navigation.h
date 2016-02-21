@@ -27,8 +27,7 @@ const std::string initialPage = "http://www.acm.org/";
 class WebNavigationTest : public CxxTest::TestSuite
 {
 public:
-	enum EXCUTE_RESULT{ QUIT = 0, SUCCESS };
-
+	enum excuteResult{ QUIT = 0, EXECUTE, IGNORED };
 	void test_goBackEmptyBackwardStack(void)
 	{
 		TWebNavigation aWebNavigation;
@@ -96,19 +95,19 @@ public:
 		TWebNavigation aWebNavigation;
 
 		std::string currentPage;
-		int ret = aWebNavigation.excute( "BACK", currentPage );
+		int ret = aWebNavigation.execute( "BACK", currentPage );
 		TS_ASSERT_EQUALS( currentPage, "Ignored" );
-		TS_ASSERT_EQUALS( ret, SUCCESS );
+		TS_ASSERT_EQUALS( ret, IGNORED );
 
-		ret = aWebNavigation.excute( "FORWARD", currentPage );
+		ret = aWebNavigation.execute( "FORWARD", currentPage );
 		TS_ASSERT_EQUALS( currentPage, "Ignored" );
-		TS_ASSERT_EQUALS( ret, SUCCESS );
+		TS_ASSERT_EQUALS( ret, IGNORED );
 
-		ret = aWebNavigation.excute( "VISIT http://www.naver.com", currentPage );
+		ret = aWebNavigation.execute( "VISIT http://www.naver.com", currentPage );
 		TS_ASSERT_EQUALS( currentPage, "http://www.naver.com" );
-		TS_ASSERT_EQUALS( ret, SUCCESS );
+		TS_ASSERT_EQUALS( ret, EXECUTE );
 
-		ret = aWebNavigation.excute( "QUIT", currentPage );
+		ret = aWebNavigation.execute( "QUIT", currentPage );
 		TS_ASSERT_EQUALS( ret, QUIT );
 	}
 
